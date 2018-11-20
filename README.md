@@ -1,21 +1,45 @@
 # GameManager
 
-**TODO: Add description**
+This demo app works will work with the [game-server](https://github.com/lyoun83/game-server) to create and manage card games.
 
-## Installation
+### API Usage
+So far the tested API looks like this
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `game_manager` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:game_manager, "~> 0.1.0"}
-  ]
-end
 ```
+iex> GameManager.new_player %{first_name: "Ladarius", last_name: "Young"}
+    %GameManager.Player{
+      email: "email@example.com",
+      first_name: "Ladarius",
+      id: 0,
+      last_name: "Young"
+    }
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/game_manager](https://hexdocs.pm/game_manager).
+    iex> GameManager.new_game %GameManager.Player{email: "email@example.com",first_name: "Ladarius",id: 0,last_name: "Young"}
+    %GameManager.Game{
+      player_1: %GameManager.Player{
+        email: "email@example.com",
+        first_name: "Ladarius",
+        id: 0,
+        last_name: "Young"
+      },
+      player_2: nil
+    }
+
+    iex> GameManager.add_player %GameManager.Game{player_1: %GameManager.Player{email: "email@example.com",first_name: "Ladarius",id: 0,last_name: "Young"}, player_2: nil, start_time: nil}, %GameManager.Player{email: "email@example.com",first_name: "Ladarius",id: 1,last_name: "Young"}
+    %GameManager.Game{
+      player_1: %GameManager.Player{
+        email: "email@example.com",
+        first_name: "Ladarius",
+        id: 0,
+        last_name: "Young"
+      },
+      player_2: %GameManager.Player{
+        email: "email@example.com",
+        first_name: "Ladarius",
+        id: 1,
+        last_name: "Young"
+      },
+      start_time: nil
+    }
+```
 
