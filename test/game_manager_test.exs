@@ -2,33 +2,33 @@ defmodule GameManagerTest do
   use ExUnit.Case
   doctest GameManager
 
-  @player_params %{first_name: "Ladarius", last_name: "Young", id: 1}
-  @player_params_list [first_name: "Ladarius", last_name: "Young", id: 2]
-  @default_player %GameManager.Player{email: "email@example.com", first_name: "Defualt", id: 0, last_name: "Default"}
-  @completed_player_1 %GameManager.Player{email: "email@example.com", first_name: "Ladarius", id: 1, last_name: "Young"}
-  @completed_player_2 %GameManager.Player{email: "email@example.com", first_name: "Ladarius", id: 2, last_name: "Young"}
+  @player_params %{first_name: "Ladarius", last_name: "Young"}
+  @player_params_list [first_name: "John", last_name: "Young"]
+  @default_player %GameManager.Player{email: "email@example.com", first_name: "Default", last_name: "Default"}
+  @completed_player_1 GameManager.Player.new(@player_params)
+  @completed_player_2 GameManager.Player.new(@player_params_list)
   @new_game GameManager.new_game(@completed_player_1)
 
   test "Creates New Player with Map" do
-    assert GameManager.new_player(@player_params) == @completed_player_1
+    assert GameManager.new_player(@player_params).first_name == @completed_player_1.first_name
   end
 
   test "Creates new player with list" do
-    assert GameManager.new_player(@player_params_list) == @completed_player_2
+    assert GameManager.new_player(@player_params_list).first_name == @completed_player_2.first_name
   end
 
   test "Creates New Game" do
     new_game = GameManager.new_game(@completed_player_1)
-    assert new_game.player_1 == @completed_player_1
+    assert new_game.player_1.first_name == @completed_player_1.first_name
   end
 
   test "Adds New Player" do
     new_game = GameManager.add_player(@new_game, @completed_player_2)
-    assert new_game.player_2 == @completed_player_2
+    assert new_game.player_2.first_name == @completed_player_2.first_name
   end
 
   test "Creates default player" do
-    assert GameManager.new_player([]) == @default_player
+    assert GameManager.new_player([]).last_name == @default_player.last_name
   end
 
   test "Won't create player without collectable" do
