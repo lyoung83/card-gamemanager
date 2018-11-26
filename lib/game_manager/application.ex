@@ -10,7 +10,8 @@ defmodule GameManager.Application do
     children = [
       # Starts a worker by calling: GameManager.Worker.start_link(arg)
       # {GameManager.Worker, arg},
-      {GameManager.Repo, []}
+      {GameManager.Repo, []},
+      {GameManager.Manager, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

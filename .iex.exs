@@ -1,5 +1,4 @@
-alias GameManager
-alias GameManager.{Game, Player, Repo, Metadata}
+alias GameManager.{Game, Player, Repo, Metadata, Manager}
 
 player_params = %{first_name: "Ladarius", last_name: "Young"}
 
