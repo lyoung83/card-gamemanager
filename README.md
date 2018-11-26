@@ -6,15 +6,27 @@ This demo app works will work with the [game-server](https://github.com/lyoun83/
 So far the tested API looks like this
 
 ```
-iex> GameManager.new_player %{first_name: "Ladarius", last_name: "Young"}
+player_params = %{first_name: "Ladarius", last_name: "Young"}
+
+  player2_params = %{ player_params | first_name: "Taylor"}
+
+  player = GameManager.new_player player_params
     %GameManager.Player{
       email: "email@example.com",
       first_name: "Ladarius",
-      id: 0,
+      id: any,
       last_name: "Young"
     }
 
-    iex> GameManager.new_game %GameManager.Player{email: "email@example.com",first_name: "Ladarius",id: 0,last_name: "Young"}
+  player2 = GameManager.new_player(player2_params)
+    %GameManager.Player{
+      email: "email@example.com",
+      first_name: "Taylor",
+      id: any,
+      last_name: "Young"
+    }
+
+  game = GameManager.new_game player
     %GameManager.Game{
       player_1: %GameManager.Player{
         email: "email@example.com",
@@ -25,7 +37,7 @@ iex> GameManager.new_player %{first_name: "Ladarius", last_name: "Young"}
       player_2: nil
     }
 
-    iex> GameManager.add_player %GameManager.Game{player_1: %GameManager.Player{email: "email@example.com",first_name: "Ladarius",id: 0,last_name: "Young"}, player_2: nil, start_time: nil}, %GameManager.Player{email: "email@example.com",first_name: "Ladarius",id: 1,last_name: "Young"}
+  GameManager.add_player game, player2
     %GameManager.Game{
       player_1: %GameManager.Player{
         email: "email@example.com",
@@ -35,7 +47,7 @@ iex> GameManager.new_player %{first_name: "Ladarius", last_name: "Young"}
       },
       player_2: %GameManager.Player{
         email: "email@example.com",
-        first_name: "Ladarius",
+        first_name: "Taylor",
         id: 1,
         last_name: "Young"
       },
