@@ -33,11 +33,8 @@ config :game_manager, GameManager.Repo,
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-#     import_config "#{Mix.env}.exs"
+use Mix.Config
 
 config :game_manager, ecto_repos: [GameManager.Repo]
 
-config :game_manager, GameManager.Repo,
-        database: "game_manager",
-        username: "postgres",
-        password: "postgres"
+import_config "#{Mix.env()}.exs"

@@ -67,4 +67,6 @@ defmodule GameManager.Metadata do
     %__MODULE__{}
     |> changeset(%{data: game})
   end
+
+  def new_game_data(_), do: raise ArgumentError, "Improper %GameManager.Game{} struct submitted"
 end
